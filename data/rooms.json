@@ -1,0 +1,92 @@
+[
+ {
+    "id": "1",
+    "type": "Estándar",
+    "pricePerNight": 120000,
+    "maxCapacity": 2
+ },
+ {
+    "id": "2",
+    "type": "Estándar",
+    "pricePerNight": 120000,
+    "maxCapacity": 2
+ },
+ {
+    "id": "3",
+    "type": "Estándar",
+    "pricePerNight": 120000,
+    "maxCapacity": 2
+ },
+ {
+    "id": "4",
+    "type": "Estándar",
+    "pricePerNight": 120000,
+    "maxCapacity": 2
+ },
+ {
+    "id": "5",
+    "type":"Estándar",
+    "pricePerNight": 120000,
+    "maxCapacity": 2
+ },
+ {
+    "id": "6",
+    "type": "Familiar",
+    "pricePerNight": 200000,
+    "maxCapacity": 4
+ },
+ {
+    "id": "7",
+    "type": "Familiar",
+    "pricePerNight": 200000,
+    "maxCapacity": 4
+ },
+ {
+    "id": "8",
+    "type":"Familiar",
+    "pricePerNight": 200000,
+    "maxCapacity": 4
+ },
+ {
+    "id": "9",
+    "type":"Familiar",
+    "pricePerNight": 200000,
+    "maxCapacity": 4
+ },
+ {
+    "id": "10",
+    "type":"Familiar",
+    "pricePerNight": 200000,
+    "maxCapacity": 4
+ },
+ {
+    "id": "11",
+    "type":"Premium",
+    "pricePerNight": 350000,
+    "maxCapacity": 2
+ },
+ {
+    "id": "12",
+    "type":"Premium",
+    "pricePerNight": 350000,
+    "maxCapacity": 2
+ },
+ {
+    "id": "13",
+    "type":"Premium",
+    "pricePerNight": 350000,
+    "maxCapacity": 2
+ },
+ {
+    "id": "14",
+    "type":"Premium",
+    "pricePerNight": 350000,
+    "maxCapacity": 2
+ },
+ {
+    "id": "15",
+    "type":"Premium",
+    "pricePerNight": 350000,
+    "maxCapacity": 2
+ }
+]
