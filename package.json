@@ -17,5 +17,10 @@
   "bugs": {
     "url": "https://github.com/AnyiManco848/Sistema_de_Reservas_Hotel/issues"
   },
-  "homepage": "https://github.com/AnyiManco848/Sistema_de_Reservas_Hotel#readme"
+  "homepage": "https://github.com/AnyiManco848/Sistema_de_Reservas_Hotel#readme",
+  "devDependencies": {
+    "@types/node": "^26.6.2",
+    "typescript": "^7.0.2",
+    "vitest": "^5.0.1"
+  }
 }

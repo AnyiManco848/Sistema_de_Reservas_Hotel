@@ -1,0 +1,24 @@
+# Dependencias
+node_modules/
+
+# Salida de compilación TypeScript
+dist/
+*.tsbuildinfo
+
+# Logs de npm
+npm-debug.log*
+
+# Cobertura de pruebas (Vitest)
+coverage/
+*.lcov
+
+# Pruebas de mutantes (Stryker)
+.stryker-tmp/
+reports/
+
+# Variables de entorno (ej. token de SonarCloud en local)
+.env
+.env.local
+
+# Archivos del sistema operativo
+Thumbs.db
