@@ -1,6 +1,6 @@
 export type roomType = "Estandar" | "Familiar" | "Premium";
 
-export interface room {
+export interface Room {
   id: string;
   type: roomType;
   pricePerNight: number;
