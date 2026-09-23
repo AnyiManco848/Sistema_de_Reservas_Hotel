@@ -122,5 +122,3 @@ Cada push a `master` y cada Pull Request dispara un análisis automático en Son
 - Vitest (pruebas unitarias y cobertura)
 - StrykerJS (pruebas de mutantes)
 - SonarCloud (calidad de código, CI/CD vía GitHub Actions)
-
-prueba
