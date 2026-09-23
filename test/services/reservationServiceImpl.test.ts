@@ -20,6 +20,7 @@ describe("ReservationServiceImpl", () => {
     rooms = [
       { id: "STD-101", type: "Estandar", pricePerNight: 120000, maxCapacity: 2 },
       { id: "FAM-201", type: "Familiar", pricePerNight: 200000, maxCapacity: 4 },
+      { id: "PRE-301", type: "Premium", pricePerNight: 350000, maxCapacity: 2 },
     ];
 
     const roomRepository: RoomRepository = {
@@ -41,6 +42,11 @@ describe("ReservationServiceImpl", () => {
       expect(() =>
         service.calcularCostoTotal("NO-EXISTE", new Date("2026-05-01"), new Date("2026-05-04"))
       ).toThrow("La habitación no existe");
+    });
+
+    it("calcula el costo correcto para una habitación Premium", () => {
+      const costo = service.calcularCostoTotal("PRE-301", diasDesdeHoy(10), diasDesdeHoy(12));
+      expect(costo).toBe(700000); // 350000 x 2 noches
     });
   });
 
@@ -65,13 +71,11 @@ describe("ReservationServiceImpl", () => {
       expect(disponibles.find((r) => r.id === "STD-101")).toBeDefined();
     });
 
-    // NUEVO: huéspedes exactamente igual a la capacidad máxima sí debe caber
     it("incluye una habitación cuando guests es exactamente igual a la capacidad máxima", () => {
       const disponibles = service.consultarDisponibilidad(diasDesdeHoy(5), diasDesdeHoy(8), 2);
       expect(disponibles.find((r) => r.id === "STD-101")).toBeDefined();
     });
 
-    // NUEVO: 0 huéspedes no debe considerar ninguna habitación disponible
     it("no incluye ninguna habitación si guests es 0", () => {
       const disponibles = service.consultarDisponibilidad(diasDesdeHoy(5), diasDesdeHoy(8), 0);
       expect(disponibles).toHaveLength(0);
@@ -91,7 +95,6 @@ describe("ReservationServiceImpl", () => {
       ).toThrow("La fecha de entrada debe ser anterior a la fecha de salida");
     });
 
-    // NUEVO: checkIn igual a checkOut también debe fallar, no solo checkIn > checkOut
     it("lanza error si checkIn es igual a checkOut", () => {
       const mismaFecha = diasDesdeHoy(10);
       expect(() =>
@@ -108,7 +111,6 @@ describe("ReservationServiceImpl", () => {
       );
     });
 
-    // NUEVO: exactamente una noche sí debe permitirse
     it("permite una reserva de exactamente una noche", () => {
       expect(() =>
         service.crearReserva("STD-101", diasDesdeHoy(30), diasDesdeHoy(31), 1)
@@ -121,7 +123,6 @@ describe("ReservationServiceImpl", () => {
       ).toThrow("No se permiten fechas pasadas");
     });
 
-    // NUEVO: hoy mismo NO cuenta como fecha pasada
     it("permite crear una reserva con checkIn el día de hoy", () => {
       expect(() =>
         service.crearReserva("STD-101", diasDesdeHoy(0), diasDesdeHoy(3), 1)
@@ -140,7 +141,6 @@ describe("ReservationServiceImpl", () => {
       ).toThrow("El número de huéspedes no es válido para esta habitación");
     });
 
-    // NUEVO: guests exactamente igual a la capacidad sí debe permitirse
     it("permite una reserva cuando guests es exactamente igual a la capacidad", () => {
       expect(() =>
         service.crearReserva("STD-101", diasDesdeHoy(40), diasDesdeHoy(43), 2)
@@ -154,7 +154,6 @@ describe("ReservationServiceImpl", () => {
       ).toThrow("La habitación ya tiene una reserva en esas fechas");
     });
 
-    // NUEVO: una reserva que empieza el mismo día en que otra termina NO es traslape
     it("permite una reserva que empieza el mismo día en que termina otra", () => {
       service.crearReserva("STD-101", diasDesdeHoy(10), diasDesdeHoy(13), 1);
       expect(() =>
@@ -162,7 +161,6 @@ describe("ReservationServiceImpl", () => {
       ).not.toThrow();
     });
 
-    // NUEVO: una reserva que termina el mismo día en que otra empieza NO es traslape
     it("permite una reserva que termina el mismo día en que empieza otra", () => {
       service.crearReserva("STD-101", diasDesdeHoy(20), diasDesdeHoy(23), 1);
       expect(() =>
@@ -198,7 +196,6 @@ describe("ReservationServiceImpl", () => {
       ).not.toThrow();
     });
 
-    // NUEVO: cancela específicamente la reserva pedida, no "la primera que encuentre"
     it("cancela la reserva correcta cuando hay varias en el repositorio", () => {
       const reservaA = service.crearReserva("STD-101", diasDesdeHoy(10), diasDesdeHoy(13), 1);
       const reservaB = service.crearReserva("FAM-201", diasDesdeHoy(15), diasDesdeHoy(18), 2);
