@@ -1,92 +1,92 @@
 [
- {
-    "id": "1",
-    "type": "Estándar",
+  {
+    "id": "STD-101",
+    "type": "Estandar",
     "pricePerNight": 120000,
     "maxCapacity": 2
- },
- {
-    "id": "2",
-    "type": "Estándar",
+  },
+  {
+    "id": "STD-102",
+    "type": "Estandar",
     "pricePerNight": 120000,
     "maxCapacity": 2
- },
- {
-    "id": "3",
-    "type": "Estándar",
+  },
+  {
+    "id": "STD-103",
+    "type": "Estandar",
     "pricePerNight": 120000,
     "maxCapacity": 2
- },
- {
-    "id": "4",
-    "type": "Estándar",
+  },
+  {
+    "id": "STD-104",
+    "type": "Estandar",
     "pricePerNight": 120000,
     "maxCapacity": 2
- },
- {
-    "id": "5",
-    "type":"Estándar",
+  },
+  {
+    "id": "STD-105",
+    "type": "Estandar",
     "pricePerNight": 120000,
     "maxCapacity": 2
- },
- {
-    "id": "6",
+  },
+  {
+    "id": "FAM-201",
     "type": "Familiar",
     "pricePerNight": 200000,
     "maxCapacity": 4
- },
- {
-    "id": "7",
+  },
+  {
+    "id": "FAM-202",
     "type": "Familiar",
     "pricePerNight": 200000,
     "maxCapacity": 4
- },
- {
-    "id": "8",
-    "type":"Familiar",
+  },
+  {
+    "id": "FAM-203",
+    "type": "Familiar",
     "pricePerNight": 200000,
     "maxCapacity": 4
- },
- {
-    "id": "9",
-    "type":"Familiar",
+  },
+  {
+    "id": "FAM-204",
+    "type": "Familiar",
     "pricePerNight": 200000,
     "maxCapacity": 4
- },
- {
-    "id": "10",
-    "type":"Familiar",
+  },
+  {
+    "id": "FAM-205",
+    "type": "Familiar",
     "pricePerNight": 200000,
     "maxCapacity": 4
- },
- {
-    "id": "11",
-    "type":"Premium",
+  },
+  {
+    "id": "PRE-301",
+    "type": "Premium",
     "pricePerNight": 350000,
     "maxCapacity": 2
- },
- {
-    "id": "12",
-    "type":"Premium",
+  },
+  {
+    "id": "PRE-302",
+    "type": "Premium",
     "pricePerNight": 350000,
     "maxCapacity": 2
- },
- {
-    "id": "13",
-    "type":"Premium",
+  },
+  {
+    "id": "PRE-303",
+    "type": "Premium",
     "pricePerNight": 350000,
     "maxCapacity": 2
- },
- {
-    "id": "14",
-    "type":"Premium",
+  },
+  {
+    "id": "PRE-304",
+    "type": "Premium",
     "pricePerNight": 350000,
     "maxCapacity": 2
- },
- {
-    "id": "15",
-    "type":"Premium",
+  },
+  {
+    "id": "PRE-305",
+    "type": "Premium",
     "pricePerNight": 350000,
     "maxCapacity": 2
- }
+  }
 ]
