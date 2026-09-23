@@ -57,7 +57,7 @@ data/
 
 test/
 └── services/
-    └── reservationServiceImpl.test.ts # 25 pruebas unitarias
+    └── reservationServiceImpl.test.ts # 29 pruebas unitarias
 ```
 
 Cada interfaz (`RoomRepository`, `ReservationRepository`, `ReservationService`) desacopla el contrato de su implementación — permite reemplazar `JsonRoomRepository` por otra fuente de datos, o probar `ReservationServiceImpl` con repositorios falsos, sin tocar el resto del código.
@@ -91,7 +91,7 @@ Permite consultar disponibilidad, crear y cancelar reservas, calcular costos y v
 |---|---|
 | `npm start` | Corre el CLI interactivo |
 | `npm run build` | Compila el proyecto con `tsc` |
-| `npm test` | Corre las 25 pruebas unitarias con Vitest |
+| `npm test` | Corre las 29 pruebas unitarias con Vitest |
 | `npm run test:coverage` | Corre las pruebas y genera el reporte de cobertura (`coverage/lcov.info`) |
 | `npm run test:mutation` | Corre las pruebas de mutantes con Stryker |
 
@@ -99,7 +99,7 @@ Permite consultar disponibilidad, crear y cancelar reservas, calcular costos y v
 
 ### Unitarias
 
-25 pruebas con [Vitest](https://vitest.dev/), cubriendo las 8 reglas de negocio y los 4 métodos del servicio (`ReservationServiceImpl`), usando un repositorio de habitaciones falso (datos controlados en memoria) para no depender de `data/rooms.json` durante los tests.
+29 pruebas con [Vitest](https://vitest.dev/), cubriendo las 8 reglas de negocio y los 4 métodos del servicio (`ReservationServiceImpl`), usando un repositorio de habitaciones falso (datos controlados en memoria) para no depender de `data/rooms.json` durante los tests.
 
 ### Cobertura
 

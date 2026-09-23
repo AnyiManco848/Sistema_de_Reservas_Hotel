@@ -13,7 +13,25 @@ const reservationRepository = new InMemoryReservationRepository();
 const service = new ReservationServiceImpl(roomRepository, reservationRepository);
 
 function parseFecha(texto: string): Date {
-  return new Date(texto + "T00:00:00");
+  const formatoValido = /^\d{4}-\d{2}-\d{2}$/;
+  if (!formatoValido.test(texto)) {
+    throw new Error(`"${texto}" no tiene el formato esperado (YYYY-MM-DD, ej. 2026-05-01)`);
+  }
+
+  const fecha = new Date(texto + "T00:00:00");
+  if (isNaN(fecha.getTime())) {
+    throw new Error(`"${texto}" no es una fecha válida`);
+  }
+
+  return fecha;
+}
+
+function parseHuespedes(texto: string): number {
+  const numero = Number(texto);
+  if (!Number.isFinite(numero)) {
+    throw new Error(`"${texto}" no es un número válido de huéspedes`);
+  }
+  return numero;
 }
 
 function mostrarMenu(): void {
@@ -31,21 +49,25 @@ async function consultarDisponibilidad(): Promise<void> {
   const checkOut = await rl.question("Fecha de salida (YYYY-MM-DD): ");
   const guests = await rl.question("Número de huéspedes: ");
 
-  const disponibles = service.consultarDisponibilidad(
-    parseFecha(checkIn),
-    parseFecha(checkOut),
-    Number(guests)
-  );
+  try {
+    const disponibles = service.consultarDisponibilidad(
+      parseFecha(checkIn),
+      parseFecha(checkOut),
+      parseHuespedes(guests)
+    );
 
-  if (disponibles.length === 0) {
-    console.log("No hay habitaciones disponibles para esos criterios.");
-    return;
+    if (disponibles.length === 0) {
+      console.log("No hay habitaciones disponibles para esos criterios.");
+      return;
+    }
+
+    console.log("\nHabitaciones disponibles:");
+    disponibles.forEach((room) =>
+      console.log(`  ${room.id} | ${room.type} | $${room.pricePerNight}/noche | capacidad ${room.maxCapacity}`)
+    );
+  } catch (error) {
+    console.log(`\nError: ${(error as Error).message}`);
   }
-
-  console.log("\nHabitaciones disponibles:");
-  disponibles.forEach((room) =>
-    console.log(`  ${room.id} | ${room.type} | $${room.pricePerNight}/noche | capacidad ${room.maxCapacity}`)
-  );
 }
 
 async function crearReserva(): Promise<void> {
@@ -55,7 +77,12 @@ async function crearReserva(): Promise<void> {
   const guests = await rl.question("Número de huéspedes: ");
 
   try {
-    const reserva = service.crearReserva(roomId, parseFecha(checkIn), parseFecha(checkOut), Number(guests));
+    const reserva = service.crearReserva(
+      roomId,
+      parseFecha(checkIn),
+      parseFecha(checkOut),
+      parseHuespedes(guests)
+    );
     console.log("\nReserva creada:");
     console.log(reserva);
   } catch (error) {
