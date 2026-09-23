@@ -22,3 +22,8 @@ reports/
 
 # Archivos del sistema operativo
 Thumbs.db
+
+# Pruebas de mutantes (Stryker)
+.stryker-tmp/
+reports/
+stryker-setup-*.js
