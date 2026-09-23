@@ -22,11 +22,16 @@ export class ReservationServiceImpl implements ReservationService {
   }
 
   consultarDisponibilidad(checkIn: Date, checkOut: Date, guests: number): Room[] {
+    this.validarRangoFechas(checkIn, checkOut);
+
+    if (!Number.isFinite(guests) || guests <= 0) {
+      throw new Error("El número de huéspedes debe ser un valor numérico mayor que 0");
+    }
+
     const habitaciones = this.roomRepository.findAll();
 
     return habitaciones.filter((room) => {
-      const cabenLosHuespedes = guests > 0 && guests <= room.maxCapacity;
-      if (!cabenLosHuespedes) {
+      if (guests > room.maxCapacity) {
         return false;
       }
       return !this.tieneTraslape(room.id, checkIn, checkOut);
@@ -39,21 +44,9 @@ export class ReservationServiceImpl implements ReservationService {
       throw new Error("La habitación no existe");
     }
 
-    if (checkIn >= checkOut) {
-      throw new Error("La fecha de entrada debe ser anterior a la fecha de salida");
-    }
+    this.validarRangoFechas(checkIn, checkOut);
 
-    if (this.calcularNoches(checkIn, checkOut) < 1) {
-      throw new Error("La reserva debe tener mínimo una noche");
-    }
-
-    const hoy = new Date();
-    hoy.setHours(0, 0, 0, 0);
-    if (checkIn < hoy) {
-      throw new Error("No se permiten fechas pasadas");
-    }
-
-    if (guests <= 0 || guests > room.maxCapacity) {
+    if (!Number.isFinite(guests) || guests <= 0 || guests > room.maxCapacity) {
       throw new Error("El número de huéspedes no es válido para esta habitación");
     }
 
@@ -95,5 +88,25 @@ export class ReservationServiceImpl implements ReservationService {
         checkIn < reserva.checkOut &&
         reserva.checkIn < checkOut
     );
+  }
+
+  private validarRangoFechas(checkIn: Date, checkOut: Date): void {
+    if (isNaN(checkIn.getTime()) || isNaN(checkOut.getTime())) {
+      throw new Error("Las fechas ingresadas no son válidas");
+    }
+
+    if (checkIn >= checkOut) {
+      throw new Error("La fecha de entrada debe ser anterior a la fecha de salida");
+    }
+
+    if (this.calcularNoches(checkIn, checkOut) < 1) {
+      throw new Error("La reserva debe tener mínimo una noche");
+    }
+
+    const hoy = new Date();
+    hoy.setHours(0, 0, 0, 0);
+    if (checkIn < hoy) {
+      throw new Error("No se permiten fechas pasadas");
+    }
   }
 }
