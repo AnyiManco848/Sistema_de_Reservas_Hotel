@@ -11,6 +11,7 @@ export default defineConfig({
        exclude: [
         "src/repositories/jsonRoomRepository.ts",
         "src/cli.ts",
+        "src/models/*"
        ]
     },
   },
